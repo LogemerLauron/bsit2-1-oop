@@ -44,3 +44,31 @@ public class Book {
         }
     }
 }
+public class BookApp {
+    public static void main(String[] args) {
+        // Creating book objects
+        Book book1 = new Book("To Kill a Mockingbird", "Harper Lee", 281);
+        Book book2 = new Book("1984", "George Orwell", 328);
+        Book book3 = new Book("The Great Gatsby", "F. Scott Fitzgerald", 180);
+
+        System.out.println();
+
+        // Displaying book info
+        book1.displayInfo();
+        book2.displayInfo();
+        book3.displayInfo();
+
+        // Borrowing and returning books
+        book1.borrowBook();
+        book1.displayInfo();
+
+        book1.returnBook();
+        book1.displayInfo();
+
+        book2.borrowBook();
+        book2.borrowBook();  // trying to borrow again
+        book2.returnBook();
+
+        book3.displayInfo(); // untouched book
+    }
+}
