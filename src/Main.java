@@ -1,93 +1,39 @@
-import java.util.Scanner;
-
-
-public class Main {
-
-
+public class LibrarySystemDemo {
     public static void main(String[] args) {
+        Media book1 = new Book("Java Fundamentals", "B001", "Robert Martin");
+        Media dvd1 = new DVD("OOP Concepts", "D001", "Tech Films");
+        Media mag1 = new Magazine("Programming Weekly", "M001", 15);
 
-        Scanner scanner = new Scanner(System.in);
+        LibraryUser student = new Student("Alice Johnson", "S12345");
+        LibraryUser teacher = new Teacher("Dr. Smith", "T001");
+        LibraryUser librarian = new Librarian("Mary Brown", "L001");
 
+        System.out.println("\nAvailable Media:");
+        displayMediaInfo(book1);
+        displayMediaInfo(dvd1);
+        displayMediaInfo(mag1);
 
-        System.out.print("Enter Student ID: ");
+        System.out.println("\n=== Borrowing Test ===");
+        student.borrowMedia(book1);
+        teacher.borrowMedia(dvd1);
+        student.borrowMedia(book1);
 
-        String studentID = scanner.nextLine();
+        System.out.println("\n=== Returning Test ===");
+        student.returnMedia(book1);
+        librarian.borrowMedia(book1);
 
-        System.out.print("Enter First Name: ");
-
-        String firstName = scanner.nextLine();
-
-        System.out.print("Enter Last Name: ");
-
-        String lastName = scanner.nextLine();
-
-        System.out.print("Enter Student Course: ");
-
-        String studentCourse = scanner.nextLine();
-
-        System.out.print("Enter Student Section: ");
-
-        String studentSection = scanner.nextLine();
-
-
-        System.out.println("\nSTUDENT INFORMATION");
-
-        System.out.println("Student ID: " + studentID);
-
-        System.out.println("Student Name: " + firstName + " " + lastName);
-
-        System.out.println("Student Course: " + studentCourse);
-
-        System.out.println("Student Section: " + studentSection);
-
-
-        System.out.print("\nEnter Midterm Exam Score: ");
-
-        int midterm = scanner.nextInt();
-
-        System.out.print("Enter Final Exam Score: ");
-
-        int finals = scanner.nextInt();
-
-        System.out.print("Enter Project Score: ");
-
-        int project = scanner.nextInt();
-
-        System.out.print("Enter Attendance Score: ");
-
-        int attendance = scanner.nextInt();
-
-
-        System.out.println("\nSTUDENT SCORE");
-
-        System.out.println("Midterm Exam Score: " + midterm);
-
-        System.out.println("Final Exam Score: " + finals);
-
-        System.out.println("Project Score: " + project);
-
-        System.out.println("Attendance Score: " + attendance);
-
-
-        int allOverScore = midterm + finals + project + attendance;
-
-        float averageScore = allOverScore / 400.0f * 100;
-
-
-        if(averageScore * 100 >= 75){
-
-            System.out.println("\nAverage Score: " + averageScore);
-
-            System.out.println("PASSED");
-
-        } else{
-
-            System.out.println("\nAverage Score: " + averageScore);
-
-            System.out.println("FAILED");
-
-        }
-
+        System.out.println("\n=== User Information ===");
+        displayUserInfo(student);
+        displayUserInfo(teacher);
+        displayUserInfo(librarian);
     }
 
+    public static void displayMediaInfo(Media media) {
+        media.displayInfo();
+    }
+
+    public static void displayUserInfo(LibraryUser user) {
+        System.out.println(user.getUserType() + " - Max borrow limit: " + user.getMaxBorrowLimit() + " items");
+    }
 }
+
