@@ -1,93 +1,50 @@
-import java.util.Scanner;
-
-
 public class Main {
-
-
     public static void main(String[] args) {
+        Library myLibrary = new Library();
+        System.out.println("=== Library Management System ===");
 
-        Scanner scanner = new Scanner(System.in);
+        System.out.println("Adding books to library...");
+        try {
+            Book book1 = new Book("Java Programming", "John Smith", "1234567890", 2020);
+            Book book2 = new Book("Data Structures", "Jane Doe", "9876543210", 2019);
+            Book book3 = new Book("Web Development", "Mike Johnson", "5555566677", 2021);
 
-
-        System.out.print("Enter Student ID: ");
-
-        String studentID = scanner.nextLine();
-
-        System.out.print("Enter First Name: ");
-
-        String firstName = scanner.nextLine();
-
-        System.out.print("Enter Last Name: ");
-
-        String lastName = scanner.nextLine();
-
-        System.out.print("Enter Student Course: ");
-
-        String studentCourse = scanner.nextLine();
-
-        System.out.print("Enter Student Section: ");
-
-        String studentSection = scanner.nextLine();
-
-
-        System.out.println("\nSTUDENT INFORMATION");
-
-        System.out.println("Student ID: " + studentID);
-
-        System.out.println("Student Name: " + firstName + " " + lastName);
-
-        System.out.println("Student Course: " + studentCourse);
-
-        System.out.println("Student Section: " + studentSection);
-
-
-        System.out.print("\nEnter Midterm Exam Score: ");
-
-        int midterm = scanner.nextInt();
-
-        System.out.print("Enter Final Exam Score: ");
-
-        int finals = scanner.nextInt();
-
-        System.out.print("Enter Project Score: ");
-
-        int project = scanner.nextInt();
-
-        System.out.print("Enter Attendance Score: ");
-
-        int attendance = scanner.nextInt();
-
-
-        System.out.println("\nSTUDENT SCORE");
-
-        System.out.println("Midterm Exam Score: " + midterm);
-
-        System.out.println("Final Exam Score: " + finals);
-
-        System.out.println("Project Score: " + project);
-
-        System.out.println("Attendance Score: " + attendance);
-
-
-        int allOverScore = midterm + finals + project + attendance;
-
-        float averageScore = allOverScore / 400.0f * 100;
-
-
-        if(averageScore * 100 >= 75){
-
-            System.out.println("\nAverage Score: " + averageScore);
-
-            System.out.println("PASSED");
-
-        } else{
-
-            System.out.println("\nAverage Score: " + averageScore);
-
-            System.out.println("FAILED");
-
+            myLibrary.addBook(book1);
+            myLibrary.addBook(book2);
+            myLibrary.addBook(book3);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error adding book: " + e.getMessage());
         }
+        System.out.println();
 
+        myLibrary.displayAllBooks();
+        System.out.println();
+
+        System.out.println("Borrowing Java Programming...");
+        myLibrary.borrowBook("1234567890");
+        System.out.println();
+
+        System.out.println("Trying to borrow Java Programming again...");
+        myLibrary.borrowBook("1234567890");
+        System.out.println();
+
+        myLibrary.displayAvailableBooks();
+        System.out.println();
+
+        System.out.println("Returning Java Programming...");
+        myLibrary.returnBook("1234567890");
+        System.out.println();
+
+        System.out.println("Testing validation...");
+        try {
+            Book invalidBook1 = new Book("Invalid Year", "Author", "1234567890", 1449);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            Book invalidBook2 = new Book("Invalid ISBN", "Author", "123", 2022);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
-
 }
