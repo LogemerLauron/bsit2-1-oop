@@ -1,93 +1,45 @@
-import java.util.Scanner;
-
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
-
-
     public static void main(String[] args) {
+        System.out.println("═══ LIBRARY MANAGEMENT SYSTEM TEST ═══\n");
 
-        Scanner scanner = new Scanner(System.in);
+        LibraryManager manager = new LibraryManager();
 
+        System.out.println("═══ Adding Items to Library ═══");
+        Book book1 = new Book("B1", "Java Programming", "James Gosling", "12345", 500, "Programming");
+        Magazine mag1 = new Magazine("M1", "Tech Today", "Editor Smith", 45, "September", true);
+        DVD dvd1 = new DVD("D1", "The Matrix", "Wachowski Sisters", 136, "R", "Sci-Fi");
 
-        System.out.print("Enter Student ID: ");
+        manager.addItem(book1);
+        manager.addItem(mag1);
+        manager.addItem(dvd1);
 
-        String studentID = scanner.nextLine();
+        System.out.println("\n═══ Displaying All Items ═══");
+        manager.displayAllItems();
 
-        System.out.print("Enter First Name: ");
+        System.out.println("\n═══ Testing Borrowing ═══");
+        manager.borrowItem("B1", "Student John");
+        manager.borrowItem("D1", "Faculty Dr. Smith");
 
-        String firstName = scanner.nextLine();
+        System.out.println("\n═══ Displaying Available Items ═══");
+        manager.displayAvailableItems();
 
-        System.out.print("Enter Last Name: ");
+        System.out.println("\n═══ Testing Late Fees ═══");
+        Map<String, Integer> lateItems = new HashMap<>();
+        lateItems.put("Java Programming", 5);
+        lateItems.put("The Matrix", 3);
+        manager.calculateTotalLateFees(lateItems);
 
-        String lastName = scanner.nextLine();
+        System.out.println("\n═══ Testing User Information ═══");
+        Student student = new Student("U1", "John Smith", "john@email.com", "S1001", "Computer Science");
+        Faculty faculty = new Faculty("U2", "Dr. Smith", "smith@email.com", "Engineering", "Professor");
 
-        System.out.print("Enter Student Course: ");
+        student.addBorrowedItem(book1);
+        faculty.addBorrowedItem(dvd1);
 
-        String studentCourse = scanner.nextLine();
-
-        System.out.print("Enter Student Section: ");
-
-        String studentSection = scanner.nextLine();
-
-
-        System.out.println("\nSTUDENT INFORMATION");
-
-        System.out.println("Student ID: " + studentID);
-
-        System.out.println("Student Name: " + firstName + " " + lastName);
-
-        System.out.println("Student Course: " + studentCourse);
-
-        System.out.println("Student Section: " + studentSection);
-
-
-        System.out.print("\nEnter Midterm Exam Score: ");
-
-        int midterm = scanner.nextInt();
-
-        System.out.print("Enter Final Exam Score: ");
-
-        int finals = scanner.nextInt();
-
-        System.out.print("Enter Project Score: ");
-
-        int project = scanner.nextInt();
-
-        System.out.print("Enter Attendance Score: ");
-
-        int attendance = scanner.nextInt();
-
-
-        System.out.println("\nSTUDENT SCORE");
-
-        System.out.println("Midterm Exam Score: " + midterm);
-
-        System.out.println("Final Exam Score: " + finals);
-
-        System.out.println("Project Score: " + project);
-
-        System.out.println("Attendance Score: " + attendance);
-
-
-        int allOverScore = midterm + finals + project + attendance;
-
-        float averageScore = allOverScore / 400.0f * 100;
-
-
-        if(averageScore * 100 >= 75){
-
-            System.out.println("\nAverage Score: " + averageScore);
-
-            System.out.println("PASSED");
-
-        } else{
-
-            System.out.println("\nAverage Score: " + averageScore);
-
-            System.out.println("FAILED");
-
-        }
-
+        System.out.println("Student: " + student.getName() + " (" + student.getMajor() + ") - " + student.getBorrowedItemsCount() + " items borrowed");
+        System.out.println("Faculty: " + faculty.getName() + " (" + faculty.getDepartment() + ") - " + faculty.getBorrowedItemsCount() + " items borrowed");
     }
-
 }
