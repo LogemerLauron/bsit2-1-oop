@@ -1,93 +1,21 @@
-import java.util.Scanner;
-
-
 public class Main {
-
-
     public static void main(String[] args) {
+        System.out.println("Bank Name: " + BankAccount.getBankName());
+        System.out.println("Interest Rate: " + (0.03 * 100) + "%\n");
 
-        Scanner scanner = new Scanner(System.in);
+        BankAccount acc1 = new BankAccount("John Doe", 1000);
+        BankAccount acc2 = new BankAccount("Jane Smith", 2500);
+        BankAccount acc3 = new BankAccount("Bob Johnson", 500);
 
+        System.out.println("\n═══ Account Operations ═══");
+        acc1.deposit(500);
+        acc2.withdraw(300);
 
-        System.out.print("Enter Student ID: ");
+        System.out.println("\n═══ Interest Calculation ═══");
+        System.out.println(acc1.getAccountHolderName() + "'s interest: $" + acc1.calculateInterest());
+        System.out.println(acc2.getAccountHolderName() + "'s interest: $" + acc2.calculateInterest());
+        System.out.println(acc3.getAccountHolderName() + "'s interest: $" + acc3.calculateInterest());
 
-        String studentID = scanner.nextLine();
-
-        System.out.print("Enter First Name: ");
-
-        String firstName = scanner.nextLine();
-
-        System.out.print("Enter Last Name: ");
-
-        String lastName = scanner.nextLine();
-
-        System.out.print("Enter Student Course: ");
-
-        String studentCourse = scanner.nextLine();
-
-        System.out.print("Enter Student Section: ");
-
-        String studentSection = scanner.nextLine();
-
-
-        System.out.println("\nSTUDENT INFORMATION");
-
-        System.out.println("Student ID: " + studentID);
-
-        System.out.println("Student Name: " + firstName + " " + lastName);
-
-        System.out.println("Student Course: " + studentCourse);
-
-        System.out.println("Student Section: " + studentSection);
-
-
-        System.out.print("\nEnter Midterm Exam Score: ");
-
-        int midterm = scanner.nextInt();
-
-        System.out.print("Enter Final Exam Score: ");
-
-        int finals = scanner.nextInt();
-
-        System.out.print("Enter Project Score: ");
-
-        int project = scanner.nextInt();
-
-        System.out.print("Enter Attendance Score: ");
-
-        int attendance = scanner.nextInt();
-
-
-        System.out.println("\nSTUDENT SCORE");
-
-        System.out.println("Midterm Exam Score: " + midterm);
-
-        System.out.println("Final Exam Score: " + finals);
-
-        System.out.println("Project Score: " + project);
-
-        System.out.println("Attendance Score: " + attendance);
-
-
-        int allOverScore = midterm + finals + project + attendance;
-
-        float averageScore = allOverScore / 400.0f * 100;
-
-
-        if(averageScore * 100 >= 75){
-
-            System.out.println("\nAverage Score: " + averageScore);
-
-            System.out.println("PASSED");
-
-        } else{
-
-            System.out.println("\nAverage Score: " + averageScore);
-
-            System.out.println("FAILED");
-
-        }
-
+        System.out.println("\nTotal Accounts Created: " + BankAccount.getTotalAccounts());
     }
-
 }
